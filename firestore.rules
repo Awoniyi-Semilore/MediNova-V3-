@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isSuperAdmin() {
+      return isAuthenticated() && request.auth.token.email == 'semiloreawoniyi@gmail.com';
+    }
+    function getUserHospitalToken() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.hospitalToken;
+    }
+    function belongsToHospital(hospitalToken) {
+      return isAuthenticated() && getUserHospitalToken() == hospitalToken;
+    }
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isSuperAdmin());
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && request.auth.uid == userId;
+      allow delete: if isSuperAdmin();
+    }
+    match /hospitals/{hospitalId} {
+      allow read: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow create, update, delete: if isSuperAdmin();
+    }
+    match /teamMembers/{memberId} {
+      allow read, write: if isSuperAdmin();
+    }
+    match /patients/{patientId} {
+      allow read: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow create: if isAuthenticated() && belongsToHospital(request.resource.data.hospitalToken);
+      allow update: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow delete: if isSuperAdmin();
+    }
+    match /appointments/{appointmentId} {
+      allow read: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow create: if isAuthenticated() && belongsToHospital(request.resource.data.hospitalToken);
+      allow update: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow delete: if isSuperAdmin();
+    }
+    match /cases/{caseId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+    match /submissions/{submissionId} {
+      allow read: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow create: if isAuthenticated() && belongsToHospital(request.resource.data.hospitalToken);
+      allow update, delete: if isSuperAdmin();
+    }
+    match /reports/{reportId} {
+      allow read: if isSuperAdmin() || belongsToHospital(resource.data.hospitalToken);
+      allow write: if isSuperAdmin();
+    }
+    match /adminTokens/{tokenId} {
+      allow read, write: if isSuperAdmin();
+    }
+  }
+}
