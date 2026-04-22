@@ -1,107 +1,48 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './hooks/useAuth';
-import { LoadingSpinner } from './components/LoadingSpinner';
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import LandingPage from "./pages/LandingPage";
+import About from "./pages/About";
+import Partnership from "./pages/Partnership";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Navigation from "./components/Navigation";
 
-// Pages
-import { LandingPage } from './pages/LandingPage';
-import { TokenPage } from './pages/TokenPage';
-import { EmailPage } from './pages/EmailPage';
-import { ProfileSetupPage } from './pages/ProfileSetupPage';
-import { LearnerDashboard } from './pages/LearnerDashboard';
-import { SupervisorDashboard } from './pages/SupervisorDashboard';
-import { CareDashboard } from './pages/CareDashboard';
-import { AdminDashboard } from './pages/AdminDashboard';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-
-// Protected Route Component
-function ProtectedRoute({ 
-  children, 
-  allowedRoles 
-}: { 
-  children: React.ReactNode; 
-  allowedRoles?: string[];
-}) {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return <LoadingSpinner fullScreen />;
-  }
-
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    // Redirect to appropriate dashboard based on role
-    switch (user.role) {
-      case 'admin':
-        return <Navigate to="/admin" replace />;
-      case 'supervisor':
-        return <Navigate to="/supervisor" replace />;
-      case 'care':
-        return <Navigate to="/care" replace />;
-      default:
-        return <Navigate to="/dashboard" replace />;
+export default function App() {
+  const [dark, setDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") === "dark" || 
+        (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
-  }
+    return false;
+  });
 
-  return <>{children}</>;
-}
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [dark]);
 
-function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/token" element={<TokenPage />} />
-          <Route path="/email" element={<EmailPage />} />
-          <Route path="/profile-setup" element={<ProfileSetupPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          
-          {/* Protected Routes */}
-          <Route 
-            path="/dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={['learner']}>
-                <LearnerDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/supervisor" 
-            element={
-              <ProtectedRoute allowedRoles={['supervisor']}>
-                <SupervisorDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/care" 
-            element={
-              <ProtectedRoute allowedRoles={['care']}>
-                <CareDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute allowedRoles={['admin']}>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          
-          {/* Catch all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <BrowserRouter>
+      <div className="bg-slate-50 dark:bg-[#0a0a0a] text-slate-900 dark:text-white transition-colors duration-500 min-h-screen selection:bg-emerald-500/30 selection:text-emerald-900 dark:selection:text-emerald-100">
+        <Navigation dark={dark} setDark={setDark} />
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/partnership" element={<Partnership />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+    </BrowserRouter>
   );
 }
-
-export default App;

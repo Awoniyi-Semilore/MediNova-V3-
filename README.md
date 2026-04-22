@@ -42,10 +42,10 @@ VITE_FIREBASE_STORAGE_BUCKET=your_bucket
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 
-# Gemini
+# Gemini (from https://aistudio.google.com/app/apikey)
 VITE_GEMINI_API_KEY=your_gemini_key
 
-# EmailJS
+# EmailJS (from https://dashboard.emailjs.com/admin)
 VITE_EMAILJS_SERVICE_ID=your_service_id
 VITE_EMAILJS_TEMPLATE_ID=your_template_id
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
@@ -53,7 +53,7 @@ VITE_EMAILJS_PUBLIC_KEY=your_public_key
 # Admin
 VITE_ADMIN_EMAIL=your_admin_email
 
-# Twilio (optional - SMS disabled by default)
+# Twilio (Account SID and Auth Token)
 VITE_TWILIO_ACCOUNT_SID=your_account_sid
 VITE_TWILIO_AUTH_TOKEN=your_auth_token
 VITE_TWILIO_PHONE_NUMBER=your_phone_number
