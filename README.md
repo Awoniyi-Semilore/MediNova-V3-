@@ -195,7 +195,7 @@ Use the admin token: `ADMIN-MEDINOVA-2026`
 
 ## Support
 
-For bugs or feature requests, contact: semiloreawoniyi@gmail.com
+For bugs or feature requests, contact: medinovaafrica25@gmail.com
 
 ## License
 

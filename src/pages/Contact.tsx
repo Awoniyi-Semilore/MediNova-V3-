@@ -21,7 +21,7 @@ export default function Contact() {
       `Name: ${formData.name}\nEmail: ${formData.email}\nType: ${formData.type}\n\nMessage:\n${formData.message}`
     );
 
-    window.location.href = `mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
+    window.location.href = `mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
 
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
@@ -152,8 +152,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-medium text-sm">Email</p>
-                    <a href="mailto:semiloreawoniyi@gmail.com" className="text-slate-600 dark:text-slate-400 text-sm hover:text-emerald-600 transition-colors">
-                      semiloreawoniyi@gmail.com
+                    <a href="mailto:medinovaafrica25@gmail.com" className="text-slate-600 dark:text-slate-400 text-sm hover:text-emerald-600 transition-colors">
+                      medinovaafrica25@gmail.com
                     </a>
                   </div>
                 </div>

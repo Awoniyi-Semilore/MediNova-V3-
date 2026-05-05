@@ -49,7 +49,7 @@ export default function Terms() {
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nInquiry:\n${formData.inquiry}`
     );
 
-    window.location.href = `mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
+    window.location.href = `mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
 
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
@@ -157,8 +157,8 @@ export default function Terms() {
 
           <p className="text-center text-slate-600 dark:text-slate-400 text-sm mt-6">
             Or email us directly at{" "}
-            <a href="mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">
-              semiloreawoniyi@gmail.com
+            <a href="mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+              medinovaafrica25@gmail.com
             </a>
           </p>
         </motion.div>
@@ -172,8 +172,8 @@ export default function Terms() {
         >
           <p className="text-slate-600 dark:text-slate-400 text-sm">
             Last updated: April 2026. For legal inquiries, contact{" "}
-            <a href="mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">
-              semiloreawoniyi@gmail.com
+            <a href="mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+              medinovaafrica25@gmail.com
             </a>
           </p>
         </motion.div>

@@ -56,7 +56,7 @@ export default function Partnership() {
       `Name: ${formData.name}\nEmail: ${formData.email}\nOrganization: ${formData.organization}\nType: ${formData.type}\n\nMessage:\n${formData.message}`
     );
 
-    window.location.href = `mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
+    window.location.href = `mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com&subject=${subject}&body=${body}`;
 
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
@@ -363,10 +363,10 @@ export default function Partnership() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a
-              href="mailto:semiloreawoniyi@gmail.com?cc=cheagerald@yahoo.com"
+              href="mailto:medinovaafrica25@gmail.com?cc=cheagerald@yahoo.com"
               className="px-8 py-4 rounded-2xl border-2 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-semibold text-sm tracking-wide hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300"
             >
-              semiloreawoniyi@gmail.com
+              medinovaafrica25@gmail.com
             </a>
           </div>
         </motion.div>
